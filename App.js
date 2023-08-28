@@ -1,26 +1,29 @@
 const express = require('express');
-const mongoose=require('mongoose')
-const bodyParser = require('body-parser');
-const cors = require('cors'); // Import the cors library
-
+const mongoose=require('mongoose');
+var cors = require('cors'); 
 const app = express();
 const PORT = 5500;
+app.use(express.json());
 
-const corsOptions = {
+/*const corsOptions = {
   origin: 'http://localhost:8080', // Allow requests from the Vue.js development server
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
 };
 
 app.use(cors(corsOptions));
+*/
 
+app.options("*", cors());
+
+app.use(cors());
 
 
 // Connect to MongoDB
 mongoose.connect("mongodb+srv://aydinselvioglu:ym22021977@cluster0.ysvlpb7.mongodb.net/fep", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-})
+}) 
 .then(() => {
   console.log('Connected to MongoDB');
 })
